@@ -1,0 +1,10 @@
+{
+    "inputFiles": ["./src/*"],
+    "mode": "file",
+    "out": "docs",
+    "exclude": "test/*test.ts",
+    "excludeExternals": true,
+    "excludeNotExported": true,
+    "excludePrivate": true,
+    "ignoreCompilerErrors": true
+  }
