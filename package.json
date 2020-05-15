@@ -110,6 +110,7 @@
   },
   "lint-staged": {
     "{src,test}/**": "eslint",
-    "*.{ts,md,yml}": "prettier --write"
+    "*.{ts,md,yml}": "prettier --write",
+    "!pkg/**": "prettier --write"
   }
 }
