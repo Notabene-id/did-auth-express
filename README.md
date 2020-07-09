@@ -57,7 +57,7 @@ $ npm test
 To publish to NPM:
 
 ```
-$ pika-pack publish
+$ pika publish
 ```
 
 To publish dosc:
