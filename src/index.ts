@@ -1,6 +1,6 @@
-import { didResolver } from "./did-resolver";
-import didJWT from "did-jwt";
+import { agent } from "./agent";
 import { Request, Response, NextFunction } from "express";
+import { Message } from "daf-core";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -29,10 +29,17 @@ export default () => {
     const token = parts[1];
 
     try {
-      const verifiedToken = await didJWT.verifyJWT(token, {
-        resolver: didResolver,
+      const message: Message = await agent.handleMessage({
+        raw: token,
+        save: false, // default = true
       });
-      request.didauth = verifiedToken;
+
+      const issuer = message.data.iss;
+      const payload = message.data.vc.credentialSubject;
+      request.didauth = {
+        issuer,
+        payload,
+      };
       next();
     } catch (err) {
       return next(err);
