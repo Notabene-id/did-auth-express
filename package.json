@@ -1,7 +1,7 @@
 {
   "name": "did-auth-express",
   "description": "DID-Auth middelware for Express like servers",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Andres Junge <andres@notabene.id>",
   "license": "MIT",
   "homepage": "https://github.com/Notabene-id/did-auth-express#readme",
