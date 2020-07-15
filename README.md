@@ -31,7 +31,15 @@ This package provides [Express](https://expressjs.com/) middleware for DID-AUTH 
 ```javascript
 const didauth = require("did-auth-express");
 
-app.use("/api", didauth());
+app.use(
+  "/api",
+  didauth({
+    resolverOptions: {
+      infuraProjectId: process.env.INFURA_PROJECT_ID,
+      cache: false,
+    },
+  })
+);
 ```
 
 ## Development

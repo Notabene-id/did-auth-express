@@ -1,6 +1,7 @@
-import { agent } from "./agent";
+import { createDAFagent, DAFOptions } from "./agent";
 import { Request, Response, NextFunction } from "express";
 import { Message } from "daf-core";
+import { redisCache } from "./cache";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -11,7 +12,10 @@ declare global {
     }
   }
 }
-export default () => {
+
+export default (dafOptions: DAFOptions): Function => {
+  const agent = createDAFagent(dafOptions);
+
   return async (
     request: Request,
     _response: Response,
@@ -46,3 +50,5 @@ export default () => {
     }
   };
 };
+
+export { redisCache, DAFOptions };
