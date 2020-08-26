@@ -51,6 +51,7 @@ export default (dafOptions: DAFOptions): Function => {
       debug("request.didauth: %o", request.didauth);
       next();
     } catch (err) {
+      debug("err: %o", err);
       return next(err);
     }
   };
