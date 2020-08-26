@@ -2,6 +2,7 @@ import { createDAFagent, DAFOptions } from "./agent";
 import { Request, Response, NextFunction } from "express";
 import { Message } from "daf-core";
 import { redisCache } from "./cache";
+import Debug from "debug";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -15,6 +16,8 @@ declare global {
 
 export default (dafOptions: DAFOptions): Function => {
   const agent = createDAFagent(dafOptions);
+
+  const debug = Debug("did-auth-express:middleware");
 
   return async (
     request: Request,
@@ -31,12 +34,13 @@ export default (dafOptions: DAFOptions): Function => {
       return next(new Error("Format is Authorization: Bearer [token]"));
 
     const token = parts[1];
-
+    debug("token: %s", token);
     try {
       const message: Message = await agent.handleMessage({
         raw: token,
         save: false, // default = true
       });
+      debug("message: %o", message);
 
       const issuer = message.data.iss;
       const payload = message.data.vc.credentialSubject;
@@ -44,6 +48,7 @@ export default (dafOptions: DAFOptions): Function => {
         issuer,
         payload,
       };
+      debug("request.didauth: %o", request.didauth);
       next();
     } catch (err) {
       return next(err);

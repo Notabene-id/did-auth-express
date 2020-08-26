@@ -100,6 +100,7 @@
     "daf-did-jwt": "^6.1.1",
     "daf-resolver": "^6.0.0",
     "daf-w3c": "^6.0.0",
+    "debug": "^4.1.1",
     "ioredis": "^4.17.3"
   },
   "husky": {
